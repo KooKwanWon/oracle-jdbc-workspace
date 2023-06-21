@@ -657,19 +657,52 @@ FROM
 */    
 -- 사원명, 보너스 조회
 SELECT
-EMP_NAME, 
-NVL(BONUS, 0)
-FROM EMPLOYEE;
+    EMP_NAME,
+    NVL(BONUS, 0)
+FROM
+    EMPLOYEE;
 
 --사원명, 보너스포함연봉 = (월급 + 월급*보너스)*12
 SELECT
-EMP_NAME, 
-(SALARY + SALARY * NVL(BONUS, 0))*12
-FROM EMPLOYEE;
+    EMP_NAME,
+    ( SALARY + SALARY * NVL(BONUS, 0) ) * 12  "보너스포함연봉"
+FROM
+    EMPLOYEE
+ORDER BY
+    2;
 
 --사원명, 부서코드 조회 (부서코드가 NULL이면 "부서없음") 조회
 SELECT
-EMP_NAME, 
-NVL(DEPT_CODE, "부서없음")
+    EMP_NAME,
+    NVL(DEPT_CODE, '부서없음')
+FROM
+    EMPLOYEE
+ORDER BY
+    2;
+    
 
-FROM EMPLOYEE;
+/*
+    NVL2(값1, 값2, 값3)
+    -값1이 NULL이 아니면 값2를 반환하고 값1이 NULL이면 값3을 반환
+*/    
+-- 사원명, 부서코드가 있는 경우 "부서있음", 없는 경우는 "부서없음" 조회
+SELECT
+    EMP_NAME,
+    NVL2(DEPT_CODE, '부서있음', '부서없음')
+FROM
+    EMPLOYEE
+ORDER BY
+    2;
+
+
+/*
+    NULLIF(값1, 값2)
+    - 두 개의 값이 동일하면 NULL을 반환하고, 두개의 값이 동일하지 않으면 값1을 반환
+
+*/
+    SELECT NULLIF('123', '123') FROM DUAL;
+    SELECT NULLIF('123', '456') FROM DUAL;
+    
+    
+    
+    
