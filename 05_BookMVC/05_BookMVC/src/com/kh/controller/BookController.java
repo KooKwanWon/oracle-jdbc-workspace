@@ -2,7 +2,6 @@ package com.kh.controller;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.Date;
 
 import com.kh.model.dao.BookDAO;
 import com.kh.model.vo.Book;
@@ -12,9 +11,11 @@ import com.kh.model.vo.Rent;
 public class BookController {
 	private BookDAO dao = new BookDAO();
 	private Member member = new Member();
-	
+	private Rent rent = new Rent();
 	
 	public ArrayList<Book> printBookAll() throws SQLException{
+		//select
+		
 		
 		return dao.printBookAll();
 	}
@@ -22,60 +23,49 @@ public class BookController {
 	
 	public boolean registerBook(Book book) throws SQLException {
 		//insert
-		if(dao.registerBook(book) > 0) {
-			
+		
+		if(dao.registerBook(book) > 0)
 			return true;
-		}else
 		return false;
 	}
 	
 	
 	public boolean sellBook(int no) throws SQLException {
-		
-		if(dao.sellBook(no) > 0) {
-			
+		//delete
+		if(dao.sellBook(no) > 0)
 			return true;
-		}else
-			
 		return false;
 	}
 	
 	
 	public boolean registerMember(Member member) throws SQLException {
-		
-		if(dao.registerMember(member) > 0) {
-			
+		if(dao.registerMember(member) > 0)
 			return true;
-		}else
 		return false;
 	}
 	
 	
 	public Member login(String id, String password) throws SQLException {
-		
-		member = dao.login(id, password);
-	    return member;
+		if(dao.login(id, password) != null) {
+			member = dao.login(id, password);
+			return member;
+		}
+		return null;
 	}
 	
 	
 	public boolean deleteMember() throws SQLException {
 		
 		if(dao.deleteMember(member.getMemId(), member.getMemPwd()) > 0) {
-			
 			return true;
-		}else
+		}
 		return false;
 	}
 	
 	
-	public boolean rentBook(int no) throws SQLException {
-					
-		Rent rent = new Rent(member, dao.searchBook(no));
+	public boolean rentBook(int no) {
+		rent =new Rent(member, no);
 		
-		
-		if(dao.rentBook(rent) > 0) {
-			return true;
-		}else
 		return false;
 	}
 	
@@ -87,10 +77,6 @@ public class BookController {
 	
 	
 	public ArrayList<Rent> printRentBook(){
-		Rent rent = new Rent();
-		
-//		rent.setBook(new Book(rs.getString("BK_TITLE"), rs.getString("BK_AUTHOR")));
-		
 		return null;
 	}
 }

@@ -26,6 +26,7 @@ public class Application {
 	public void mainMenu() throws SQLException {
 		System.out.println("===== 도서 관리 프로그램 =====");
 		
+		
 		boolean check = true;
 		while(check) {
 			System.out.println("1. 전체 책 조회");
@@ -179,7 +180,7 @@ public class Application {
 		}
 	}
 	
-	public void deleteMember() {
+	public void deleteMember() throws SQLException {
 		if(bc.deleteMember()) {
 			System.out.println("회원탈퇴 하였습니다 ㅠㅠ");
 		} else {
