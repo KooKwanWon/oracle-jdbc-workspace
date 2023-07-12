@@ -577,4 +577,12 @@ ORDER BY
     BONUS DESC NULLS LAST; --보너스 기준 내림차순 정렬 (NULL이 맨뒤)
 
 
+SELECT
+     EMP_NAME, LPAD(SUBSTR(EMP_NAME, 2 , 1), 20)
+    
+FROM
+    EMPLOYEE
+WHERE
+    SUBSTR(EMP_NAME, 1 , 1) = '이'
+    ;
     
